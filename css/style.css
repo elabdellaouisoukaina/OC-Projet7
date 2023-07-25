@@ -9,8 +9,11 @@
 }
 
 body {
-    background-color: var(--background-color);
     margin: 0 15vw;
+}
+
+main {
+    background-color: var(--background-color);
 }
 
 h1 {
@@ -25,6 +28,7 @@ p {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin: 0;
 }
 
 
@@ -44,7 +48,7 @@ header  {
 .logo {
     display: flex;
     align-items: center;
-    position: fixed;
+    position: absolute;
     top: 30px;
     left: 50px;
     margin: 0 15vw;
@@ -63,7 +67,7 @@ header  {
 }
 
 .header__banner-content {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     margin: 0 25vw;
@@ -92,4 +96,80 @@ header  {
 
 #form1 {
     width: 600px;
+}
+
+.searchFilters {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px 80px;
+}
+
+.dropdown--all {
+    width: 53%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dropdown button {
+    width: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Manrope;
+}
+
+.resultNumber {
+    margin: 0;
+    display: flex;
+    align-self: center;
+    font-family: Anton;
+}
+
+
+/* ================================================ GALLERY ================================================ */
+
+.resultsGallery {
+    padding: 10px 80px;
+}
+
+.card {
+    width: 30%;
+    height: 550px;
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+
+.card img {
+    height: 32%;
+    object-fit: cover;
+}
+
+.card-title {
+    font-family: Anton;
+    font-size: 15px;
+}
+
+.card h3, .card--ingredient__quantity {
+    color: var(--secondary-color);
+}
+
+.card h3 {
+    font-size: 11px;
+    margin-top: 25px;
+}
+
+.ingredients-list {
+    display: flex;
+}
+
+.card--ingredient {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card--ingredient__name {
+    font-weight: bold;
 }
