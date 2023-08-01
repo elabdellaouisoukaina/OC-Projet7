@@ -6,6 +6,8 @@ for (let i=0; i < recipes.length; i++) {
     createCard(recipes[i])
 }
 
+document.querySelector('.resultNumber').innerHTML = recipes.length.toString() + " RECETTES";
+
 
 // Tests
 // console.log(search(recipes, "Thon Rouge (ou blanc)").length);
@@ -23,8 +25,9 @@ searchInput.addEventListener("input", (e) => {
     // 2. check: if input exists and if input is minimum 3
     if (value && value.trim().length > 2){
         document.querySelector('.resultsGallery').innerHTML = "";
+        document.querySelector('.resultNumber').innerHTML = search(recipes, value).length.toString() + " RECETTES";
+
         const resultRecipes = search(recipes, value);
-        
         for (let i=0; i < resultRecipes.length; i++) {
             createCard(resultRecipes[i])
         }
