@@ -95,3 +95,14 @@ export function createCard(recipe) {
 
     results.appendChild(card);
 }
+
+
+export function displayCards (recipes){
+    document.querySelector('.resultsGallery').innerHTML = "";
+    
+    for (let i=0; i < recipes.length; i++) {
+        createCard(recipes[i])
+    }
+    
+    document.querySelector('.resultNumber').innerHTML = recipes.length.toString() + " RECETTES";
+}

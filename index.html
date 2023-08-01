@@ -60,20 +60,25 @@
         <div class="searchFilters">
             <!-- Filtres de recherche -->
             <div class="dropdown--all">
-                <div>
+                <div  class="ingredientsDropdownDiv">
                     <!-- Dropdown ingrédients -->
                     <div class="dropdown">
                         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Ingrédients
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <ul class="dropdown-menu ingredientsDropdown">
+                            <li><input class="dropdown-item dropdownSearchInput" type="text" role="listbox"></li>
+                            <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
                         </ul>
                     </div>
 
                     <!-- Ingrédients selectionnés -->
+
+                    <!-- <div class="ingredientSelected">
+                        <p>Test</p> 
+                        <i class="fa-solid fa-xmark"></i>
+                    </div> -->
                 </div>
 
                 <div>
@@ -110,6 +115,7 @@
             </div>
 
             <p class="resultNumber"></p>
+
         </div>
 
         <div class="resultsGallery">

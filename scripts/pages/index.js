@@ -1,14 +1,14 @@
 import {recipes} from "../../data/recipes.js"
-import {createCard} from "../utils/recipeCard.js"
+import {displayCards} from "../utils/recipeCard.js"
 import {search} from "../utils/searchBar.js"
-
-for (let i=0; i < recipes.length; i++) {
-    createCard(recipes[i])
-}
-
-document.querySelector('.resultNumber').innerHTML = recipes.length.toString() + " RECETTES";
+import {searchIngredient} from "../utils/searchIngredients.js"
 
 
+// ------------------ Initialisation ------------------
+displayCards(recipes);
+
+
+// ------------------ Search Bar ------------------
 // Tests
 // console.log(search(recipes, "Thon Rouge (ou blanc)").length);
 // console.log(search(recipes, "Thon").length);
@@ -24,13 +24,32 @@ searchInput.addEventListener("input", (e) => {
 
     // 2. check: if input exists and if input is minimum 3
     if (value && value.trim().length > 2){
-        document.querySelector('.resultsGallery').innerHTML = "";
-        document.querySelector('.resultNumber').innerHTML = search(recipes, value).length.toString() + " RECETTES";
-
         const resultRecipes = search(recipes, value);
-        for (let i=0; i < resultRecipes.length; i++) {
-            createCard(resultRecipes[i])
-        }
+        displayCards(resultRecipes);
+
+    } else {
+        // 5. return nothing
+        // input is invalid -- show an error message or show no results
+    }
+
+});
+
+
+// ------------------ Dropdown Ingrédients ------------------
+
+const dropdownSearchInput = document.querySelector('.dropdownSearchInput');
+
+dropdownSearchInput.addEventListener("input", (e) => {
+    let value = e.target.value
+
+    let dropdownGenerated = document.querySelectorAll('.dropdown-generated');
+    dropdownGenerated.forEach(element => {
+        element.remove();
+    });
+
+    // 2. check: if input exists and if input is minimum 3
+    if (value && value.trim().length > 2){
+        searchIngredient(recipes, value)
     } else {
         // 5. return nothing
         // input is invalid -- show an error message or show no results
