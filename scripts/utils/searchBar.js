@@ -11,7 +11,9 @@ export function search(recipes, value){ // entry est un mot complet ou au minimu
         for (let i = 0; i < ingredients.length; i ++){
             let ingredient = ingredients[i].ingredient.trim().toLowerCase();
             if (ingredient.includes(entry)){
-                results.push(recipes[index]);
+                if(!results.includes(recipes[index])){
+                    results.push(recipes[index]);
+                }
             }
         }
 
@@ -28,7 +30,9 @@ export function search(recipes, value){ // entry est un mot complet ou au minimu
             let ustensil = ustensils[i].trim().toLowerCase();
 
             if (ustensil.includes(entry)){
-                results.push(recipes[index]);
+                if(!results.includes(recipes[index])){
+                    results.push(recipes[index]);
+                }
             }
         }
     }
