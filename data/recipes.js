@@ -1772,5 +1772,107 @@ export const recipes = [
         "description":"Préparer la frangipane : Mélanger le sucre la poudre d'amandes, le beurre et les oeufs. Étaler la moitié de la pate feuilleté et mettre dans un moule à tarte. Garnir de frangipane et recouvrir du reste de pate feuilletée. Mettre au four 30 minutes",
         "appliance": "Four",
         "ustensils":["rouleau à patisserie","fouet"]
+    },
+    {
+        "id": 51,
+        "image": "Recette50.jpg",
+        "name": "Test 1",
+        "ingredients": [
+            {
+                "ingredient": "ing1",
+                "quantity": 400,
+                "unit":"grammes"
+            },
+            {
+                "ingredient": "ing2",
+                "quantity": 6
+            }
+        ],
+        "time": 60,
+        "description":"...",
+        "appliance": "Four",
+        "ustensils":["rouleau à patisserie","fouet"]
+    },
+    {
+        "id": 52,
+        "image": "Recette50.jpg",
+        "name": "Test 2",
+        "ingredients": [
+            {
+                "ingredient": "ing1",
+                "quantity": 400,
+                "unit":"grammes"
+            },
+            {
+                "ingredient": "ing2",
+                "quantity": 6
+            },
+            {
+                "ingredient": "ing4",
+                "quantity": 6
+            }
+        ],
+        "time": 60,
+        "description":"...",
+        "appliance": "Four",
+        "ustensils":["rouleau à patisserie","fouet"]
+    },
+    {
+        "id": 53,
+        "image": "Recette50.jpg",
+        "name": "Test 3",
+        "ingredients": [
+            {
+                "ingredient": "ing1",
+                "quantity": 400,
+                "unit":"grammes"
+            },
+            {
+                "ingredient": "ing2",
+                "quantity": 6
+            },
+            {
+                "ingredient": "ing3",
+                "quantity": 400,
+                "unit":"grammes"
+            },
+            {
+                "ingredient": "ing4",
+                "quantity": 6
+            }
+        ],
+        "time": 60,
+        "description":"...",
+        "appliance": "Four",
+        "ustensils":["rouleau à patisserie","fouet"]
+    },
+    {
+        "id": 54,
+        "image": "Recette50.jpg",
+        "name": "Test 4",
+        "ingredients": [
+            {
+                "ingredient": "ing1",
+                "quantity": 400,
+                "unit":"grammes"
+            },
+            {
+                "ingredient": "ing5",
+                "quantity": 6
+            },
+            {
+                "ingredient": "ing3",
+                "quantity": 400,
+                "unit":"grammes"
+            },
+            {
+                "ingredient": "ing4",
+                "quantity": 6
+            }
+        ],
+        "time": 60,
+        "description":"...",
+        "appliance": "Four",
+        "ustensils":["rouleau à patisserie","fouet"]
     }
 ]

@@ -144,12 +144,12 @@ export function updateIngredientDropdown(recipes){
 
                         let newDisplayedRecipes = [];
 
-                        for (let i=0; i < displayedRecipes.length; i++) {
-                            const ingr = displayedRecipes[i].ingredients;
+                        for (let index=0; index < displayedRecipes.length; index++) {
+                            const ingr = displayedRecipes[index].ingredients;
                             for (let j=0; j < ingr.length; j++){
                                 if (ingr[j].ingredient.trim().toLowerCase() === ingredient.trim().toLowerCase()) {
-                                    if(!newDisplayedRecipes.includes(displayedRecipes[i])){
-                                        newDisplayedRecipes.push(displayedRecipes[i])
+                                    if(!newDisplayedRecipes.includes(displayedRecipes[index])){
+                                        newDisplayedRecipes.push(displayedRecipes[index])
                                     }
                                 }
                             }
