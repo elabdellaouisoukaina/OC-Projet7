@@ -105,6 +105,12 @@ header  {
     padding: 10px 80px;
 }
 
+.dropdown-menu {
+    max-height: 272px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+
 .dropdown--all {
     width: 53%;
     display: flex;
@@ -112,12 +118,14 @@ header  {
     justify-content: space-between;
 }
 
-.dropdown button {
+.dropdown-item {
     width: 140px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: Manrope;
+    font-size: 12px;
+    white-space: normal;
 }
 
 .ingredientSelected {

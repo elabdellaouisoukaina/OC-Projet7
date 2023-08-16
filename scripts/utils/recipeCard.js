@@ -97,7 +97,7 @@ export function createCard(recipe) {
 }
 
 
-export function displayCards (recipes){
+export function displayCards(recipes){
     document.querySelector('.resultsGallery').innerHTML = "";
     
     for (let i=0; i < recipes.length; i++) {

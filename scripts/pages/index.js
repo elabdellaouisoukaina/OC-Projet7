@@ -1,10 +1,11 @@
 import {recipes} from "../../data/recipes.js"
 import {displayCards} from "../utils/recipeCard.js"
 import {search} from "../utils/searchBar.js"
-import {searchIngredient} from "../utils/searchIngredients.js"
+import {searchIngredient, updateIngredientDropdown} from "../utils/searchIngredients.js"
 
 
 // ------------------ Initialisation ------------------
+displayedRecipes = recipes;
 displayCards(recipes);
 
 
@@ -24,8 +25,9 @@ searchInput.addEventListener("input", (e) => {
 
     // 2. check: if input exists and if input is minimum 3
     if (value && value.trim().length > 2){
-        const resultRecipes = search(recipes, value);
-        displayCards(resultRecipes);
+        displayedRecipes = search(recipes, value);
+        displayCards(displayedRecipes);
+        updateIngredientDropdown(displayedRecipes);
 
     } else {
         // 5. return nothing
@@ -36,6 +38,8 @@ searchInput.addEventListener("input", (e) => {
 
 
 // ------------------ Dropdown Ingrédients ------------------
+
+updateIngredientDropdown(recipes); // Initialisation de la liste de tous les ngrédients 
 
 const dropdownSearchInput = document.querySelector('.dropdownSearchInput');
 
