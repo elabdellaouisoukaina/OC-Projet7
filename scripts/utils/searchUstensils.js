@@ -44,7 +44,7 @@ export function updateUstensilDropdown(recipes){
                         const ustensilsDropdownDiv = document.querySelector('.ustensilsDropdownDiv');
             
                         const ustensilSelected = document.createElement("div");
-                        ustensilSelected.classList.add("ingredientSelected", ustensilClass);
+                        ustensilSelected.classList.add("ustensilSelected", ustensilClass, "filterSelected");
     
                         const p = document.createElement("p");
                         p.textContent = ustensilsRecipe[j];
@@ -90,9 +90,9 @@ export function updateUstensilDropdown(recipes){
 
                         button.classList.remove('dropdownSelected');
                             
-                        let ingredientSelected = document.getElementsByClassName('ingredientSelected');
+                        let ustensilSelected = document.getElementsByClassName('ustensilSelected');
                        
-                        ingredientSelected.forEach(element => {
+                        ustensilSelected.forEach(element => {
                             if (element.firstChild.textContent === ustensilsRecipe[j]) {
                                 element.remove();
                             }

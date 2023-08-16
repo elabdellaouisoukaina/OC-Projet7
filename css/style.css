@@ -128,7 +128,7 @@ header  {
     white-space: normal;
 }
 
-.ingredientSelected {
+.filterSelected {
     border-radius: 10px;
     background: var(--highlight-color);
     display: flex;

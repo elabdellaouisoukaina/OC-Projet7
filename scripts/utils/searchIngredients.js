@@ -130,7 +130,7 @@ export function updateIngredientDropdown(recipes){
                         const ingredientsDropdownDiv = document.querySelector('.ingredientsDropdownDiv');
             
                         const ingredientSelected = document.createElement("div");
-                        ingredientSelected.classList.add("ingredientSelected", ingredientClass);
+                        ingredientSelected.classList.add("ingredientSelected", ingredientClass, "filterSelected");
     
                         const p = document.createElement("p");
                         p.textContent = ingredient;
