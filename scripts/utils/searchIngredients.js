@@ -86,8 +86,9 @@ export function searchIngredient(recipes, value) {
 
 
 export function updateIngredientDropdown(recipes){
+
     // Mise à 0 de la liste des ingrédients présents dans le dropdown
-    let dropdownGenerated = document.querySelectorAll('.dropdown-generated');
+    let dropdownGenerated = document.querySelectorAll('.dropdown-ingredients-generated');
     dropdownGenerated.forEach(element => {
         element.remove();
     });
@@ -100,6 +101,7 @@ export function updateIngredientDropdown(recipes){
 
         for (let i = 0; i < ingredientsRecipe.length; i ++){
             const ingredient = ingredientsRecipe[i].ingredient;
+            const ingredientClass = ingredient.split(" ").join("").normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             if(!ingredientsList.includes(ingredient)){
 
                 ingredientsList.push(ingredient);
@@ -107,23 +109,28 @@ export function updateIngredientDropdown(recipes){
                 // Création de l'ingrédient dans le dropdown
                 const ingredientsDropdown = document.querySelector('.ingredientsDropdown');
                 const li = document.createElement('li');
+                li.classList.add(ingredientClass);
                 const button = document.createElement('button');
-                button.classList.add('dropdown-item','dropdown-generated');
+                button.classList.add('dropdown-item','dropdown-generated', 'dropdown-ingredients-generated');
                 button.textContent = ingredient;
                 li.appendChild(button);
                 ingredientsDropdown.appendChild(li);
 
                 let isIngredientSelected = false;
 
+                let previousDisplayedRecipes = displayedRecipes;
+                
                 button.addEventListener("click", () => {
                     if (isIngredientSelected === false) {
-                        button.classList.add('dropdownSelected');
+                        isIngredientSelected = true;
 
+                        button.classList.add('dropdownSelected');
+ 
                         // Ajout du bouton sélectionné sous le dropdown 
                         const ingredientsDropdownDiv = document.querySelector('.ingredientsDropdownDiv');
             
                         const ingredientSelected = document.createElement("div");
-                        ingredientSelected.classList.add("ingredientSelected");
+                        ingredientSelected.classList.add("ingredientSelected", ingredientClass);
     
                         const p = document.createElement("p");
                         p.textContent = ingredient;
@@ -134,13 +141,14 @@ export function updateIngredientDropdown(recipes){
                         i.addEventListener("click", () => {
                             ingredientSelected.remove();
                             button.classList.remove('dropdownSelected');
+                            isIngredientSelected = false;
+
+                            displayCards(previousDisplayedRecipes)
                         })
     
                         ingredientSelected.appendChild(p);
                         ingredientSelected.appendChild(i);
                         ingredientsDropdownDiv.appendChild(ingredientSelected);
-
-                        isIngredientSelected = true;
 
                         let newDisplayedRecipes = [];
 
@@ -163,17 +171,17 @@ export function updateIngredientDropdown(recipes){
                     }   
                         
                     else {
+                        isIngredientSelected = false
+
                         button.classList.remove('dropdownSelected');
                             
-                        let ingredientSelected = document.querySelectorAll('.ingredientSelected');
-
+                        let ingredientSelected = document.getElementsByClassName('ingredientSelected');
+                       
                         ingredientSelected.forEach(element => {
                             if (element.firstChild.textContent === ingredient) {
                                 element.remove();
                             }
                         });
-
-                        isIngredientSelected = false
 
                     }
                 })

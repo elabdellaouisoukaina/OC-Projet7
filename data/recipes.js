@@ -1791,7 +1791,7 @@ export const recipes = [
         "time": 60,
         "description":"...",
         "appliance": "Four",
-        "ustensils":["rouleau à patisserie","fouet"]
+        "ustensils":["ust1","ust2"]
     },
     {
         "id": 52,
@@ -1815,7 +1815,7 @@ export const recipes = [
         "time": 60,
         "description":"...",
         "appliance": "Four",
-        "ustensils":["rouleau à patisserie","fouet"]
+        "ustensils":["ust1","ust2","ust4"]
     },
     {
         "id": 53,
@@ -1844,7 +1844,7 @@ export const recipes = [
         "time": 60,
         "description":"...",
         "appliance": "Four",
-        "ustensils":["rouleau à patisserie","fouet"]
+        "ustensils":["ust1","ust2","ust3","ust4"]
     },
     {
         "id": 54,
@@ -1873,6 +1873,6 @@ export const recipes = [
         "time": 60,
         "description":"...",
         "appliance": "Four",
-        "ustensils":["rouleau à patisserie","fouet"]
+        "ustensils":["ust1","ust5","ust3","ust4"]
     }
 ]

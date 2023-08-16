@@ -2,6 +2,7 @@ import {recipes} from "../../data/recipes.js"
 import {displayCards} from "../utils/recipeCard.js"
 import {search} from "../utils/searchBar.js"
 import {searchIngredient, updateIngredientDropdown} from "../utils/searchIngredients.js"
+import {updateUstensilDropdown} from "../utils/searchUstensils.js"
 
 
 // ------------------ Initialisation ------------------
@@ -28,6 +29,7 @@ searchInput.addEventListener("input", (e) => {
         displayedRecipes = search(recipes, value);
         displayCards(displayedRecipes);
         updateIngredientDropdown(displayedRecipes);
+        updateUstensilDropdown(displayedRecipes);
 
     } else {
         // 5. return nothing
@@ -40,6 +42,8 @@ searchInput.addEventListener("input", (e) => {
 // ------------------ Dropdown Ingrédients ------------------
 
 updateIngredientDropdown(recipes); // Initialisation de la liste de tous les ngrédients 
+updateUstensilDropdown(recipes); // Initialisation de la liste de tous les ustensils 
+
 
 const dropdownSearchInput = document.querySelector('.dropdownSearchInput');
 
