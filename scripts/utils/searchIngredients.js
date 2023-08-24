@@ -1,6 +1,7 @@
 // import {search} from "../utils/searchBar.js"
 
-import {displayCards} from "./recipeCard.js"
+// import {displayCards} from "./recipeCard.js"
+import  {addSelectedIngredient, getSelectedIngredients, removeSelectedIngredient, isIngredientSelected} from "../utils/state.js"
 
 // let recipesFiltered = [];
 
@@ -102,6 +103,7 @@ export function updateIngredientDropdown(recipes){
         for (let i = 0; i < ingredientsRecipe.length; i ++){
             const ingredient = ingredientsRecipe[i].ingredient;
             const ingredientClass = ingredient.split(" ").join("").normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
             if(!ingredientsList.includes(ingredient)){
 
                 ingredientsList.push(ingredient);
@@ -116,13 +118,12 @@ export function updateIngredientDropdown(recipes){
                 li.appendChild(button);
                 ingredientsDropdown.appendChild(li);
 
-                let isIngredientSelected = false;
-
-                let previousDisplayedRecipes = displayedRecipes;
+                // let previousDisplayedRecipes = displayedRecipes;
                 
                 button.addEventListener("click", () => {
-                    if (isIngredientSelected === false) {
-                        isIngredientSelected = true;
+                    if (!isIngredientSelected(ingredient)) {
+
+                        addSelectedIngredient(ingredient);
 
                         button.classList.add('dropdownSelected');
  
@@ -137,51 +138,52 @@ export function updateIngredientDropdown(recipes){
     
                         const i = document.createElement("i");
                         i.classList.add('fa-solid', 'fa-xmark');
+
                         // Au click sur la croix l'ingrdédient est deselectionné
                         i.addEventListener("click", () => {
+                            removeSelectedIngredient(ingredient);
+                            console.log(getSelectedIngredients())
+
                             ingredientSelected.remove();
                             button.classList.remove('dropdownSelected');
-                            isIngredientSelected = false;
 
-                            displayCards(previousDisplayedRecipes)
+                            // displayCards(previousDisplayedRecipes)
                         })
     
                         ingredientSelected.appendChild(p);
                         ingredientSelected.appendChild(i);
                         ingredientsDropdownDiv.appendChild(ingredientSelected);
 
-                        let newDisplayedRecipes = [];
+                        // let newDisplayedRecipes = [];
 
-                        for (let index=0; index < displayedRecipes.length; index++) {
-                            const ingr = displayedRecipes[index].ingredients;
-                            for (let j=0; j < ingr.length; j++){
-                                if (ingr[j].ingredient.trim().toLowerCase() === ingredient.trim().toLowerCase()) {
-                                    if(!newDisplayedRecipes.includes(displayedRecipes[index])){
-                                        newDisplayedRecipes.push(displayedRecipes[index])
-                                    }
-                                }
-                            }
-                        }
+                        // for (let index=0; index < displayedRecipes.length; index++) {
+                        //     const ingr = displayedRecipes[index].ingredients;
+                        //     for (let j=0; j < ingr.length; j++){
+                        //         if (ingr[j].ingredient.trim().toLowerCase() === ingredient.trim().toLowerCase()) {
+                        //             if(!newDisplayedRecipes.includes(displayedRecipes[index])){
+                        //                 newDisplayedRecipes.push(displayedRecipes[index])
+                        //             }
+                        //         }
+                        //     }
+                        // }
 
-                        displayedRecipes = newDisplayedRecipes;
+                        // displayedRecipes = newDisplayedRecipes;
 
-                        displayCards(displayedRecipes)
+                        // displayCards(displayedRecipes)
 
-                        updateIngredientDropdown(newDisplayedRecipes)
+                        // updateIngredientDropdown(newDisplayedRecipes)
                     }   
                         
                     else {
-                        isIngredientSelected = false
+                        removeSelectedIngredient(ingredient);
+                        console.log(getSelectedIngredients())
 
                         button.classList.remove('dropdownSelected');
-                            
-                        let ingredientSelected = document.getElementsByClassName('ingredientSelected');
-                       
-                        ingredientSelected.forEach(element => {
-                            if (element.firstChild.textContent === ingredient) {
-                                element.remove();
-                            }
-                        });
+                        
+                        let selector = "div." + ingredientClass;
+                        let ingredientSelected = document.querySelector(selector);
+
+                        ingredientSelected.remove();
 
                     }
                 })
