@@ -1,3 +1,16 @@
+let currentRecipes = [];
+
+export function getCurrentRecipes() {
+    return currentRecipes;
+}
+
+export function setCurrentRecipes(recipesArray){
+    currentRecipes = recipesArray;
+}
+
+
+
+
 // -------------------- Ingrédients --------------------
 
 let selectedIngredients = [];

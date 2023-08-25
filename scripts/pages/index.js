@@ -1,14 +1,23 @@
 import {recipes} from "../../data/recipes.js"
 import {displayCards} from "../utils/recipeCard.js"
 import {search} from "../utils/searchBar.js"
-import {searchIngredient, updateIngredientDropdown} from "../utils/searchIngredients.js"
+import {searchIngredient, createIngredientDropdown, updateIngredientDropdown} from "../utils/searchIngredients.js"
 import {updateUstensilDropdown} from "../utils/searchUstensils.js"
 import {updateApplianceDropdown} from "../utils/searchAppliance.js"
+import {setCurrentRecipes, getCurrentRecipes} from "../utils/state.js"
 
 
 // ------------------ Initialisation ------------------
-displayedRecipes = recipes;
-displayCards(recipes);
+function init() {
+    setCurrentRecipes(recipes);
+    displayCards(recipes);
+
+    createIngredientDropdown(recipes); // Initialisation de la liste de tous les ngrédients 
+    // updateUstensilDropdown(recipes); // Initialisation de la liste de tous les ustensils 
+    // updateApplianceDropdown(recipes); // Initialisation de la liste de tous les appareils 
+}
+
+init();
 
 
 // ------------------ Search Bar ------------------
@@ -27,11 +36,12 @@ searchInput.addEventListener("input", (e) => {
 
     // 2. check: if input exists and if input is minimum 3
     if (value && value.trim().length > 2){
-        displayedRecipes = search(recipes, value);
+        let displayedRecipes = search(recipes, value);
+        setCurrentRecipes(displayedRecipes)
         displayCards(displayedRecipes);
         updateIngredientDropdown(displayedRecipes);
-        updateUstensilDropdown(displayedRecipes);
-        updateApplianceDropdown(displayedRecipes);
+        // updateUstensilDropdown(displayedRecipes);
+        // updateApplianceDropdown(displayedRecipes);
 
     } else {
         // 5. return nothing
@@ -43,26 +53,18 @@ searchInput.addEventListener("input", (e) => {
 
 // ------------------ Dropdown Ingrédients ------------------
 
-updateIngredientDropdown(recipes); // Initialisation de la liste de tous les ngrédients 
-updateUstensilDropdown(recipes); // Initialisation de la liste de tous les ustensils 
-updateApplianceDropdown(displayedRecipes); // Initialisation de la liste de tous les appareils 
-
-
-
 const dropdownSearchInput = document.querySelector('.dropdownSearchInput');
 
 dropdownSearchInput.addEventListener("input", (e) => {
     let value = e.target.value
 
-    let dropdownGenerated = document.querySelectorAll('.dropdown-generated');
-    dropdownGenerated.forEach(element => {
-        element.remove();
-    });
-
     // 2. check: if input exists and if input is minimum 3
     if (value && value.trim().length > 2){
-        searchIngredient(recipes, value)
-    } else {
+        searchIngredient(value)
+    } else if (value.length === 0) {
+        createIngredientDropdown(getCurrentRecipes());
+    }
+    else {
         // 5. return nothing
         // input is invalid -- show an error message or show no results
     }

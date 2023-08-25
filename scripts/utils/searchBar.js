@@ -1,3 +1,5 @@
+import {setCurrentRecipes} from "../utils/state.js"
+
 export function search(recipes, value){ // entry est un mot complet ou au minimum 3 lettres
     const results = [];
     let entry = value.trim().toLowerCase();
@@ -36,6 +38,8 @@ export function search(recipes, value){ // entry est un mot complet ou au minimu
             }
         }
     }
+
+    setCurrentRecipes(results);
 
     return results; // Retourne une liste des recettes correspondant à la recherche, peut être une liste vide
 }
