@@ -1,6 +1,6 @@
 import {setCurrentRecipes} from "../utils/state.js"
 
-export function search(recipes, value){ // entry est un mot complet ou au minimum 3 lettres
+export function searchText(recipes, value){ // entry est un mot complet ou au minimum 3 lettres
     const results = [];
     let entry = value.trim().toLowerCase();
 

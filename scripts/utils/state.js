@@ -8,8 +8,29 @@ export function setCurrentRecipes(recipesArray){
     currentRecipes = recipesArray;
 }
 
+// -------------------- Tous les filtres --------------------
 
+let allFilters = [[], '', [], []]; // [[ingredientsSelected], applianceSelected, [ustensilsSelected], [texte searchbar]]
 
+export function getAllFilters() {
+    if (getSelectedIngredients() !== []) {
+        allFilters[0] = getSelectedIngredients();
+    }
+
+    if (getSelectedAppliance() !== "") {
+        allFilters[1] = getSelectedAppliance();
+    }
+
+    if (getSelectedUstensils() !== []) {
+        allFilters[2] = getSelectedUstensils();
+    }
+
+    if (getSearchedText() !== []) {
+        allFilters[3] = getSearchedText();
+    }
+
+    return allFilters;
+}
 
 // -------------------- Ingrédients --------------------
 
