@@ -45,7 +45,8 @@ export function addSelectedIngredient(ingredient) {
 }
 
 export function removeSelectedIngredient(ingredient) {
-    selectedIngredients = selectedIngredients.filter(element => element !== ingredient)
+    const index = selectedIngredients.indexOf(ingredient);
+    selectedIngredients.splice(index, 1);    
 }
 
 export function isIngredientSelected(ingredient) {
@@ -89,7 +90,8 @@ export function addSelectedUstensil(ustensil) {
 }
 
 export function removeSelectedUstensil(ustensil) {
-    selectedUstensils = selectedUstensils.filter(element => element !== ustensil)
+    const index = selectedIngredients.indexOf(ustensil);
+    selectedIngredients.splice(index, 1); 
 }
 
 
@@ -108,4 +110,7 @@ export function addSearchedText(text) {
 
 export function removeSearchedText(text) {
     searchedText = searchedText.filter(element => element !== text)
+
+    // const index = selectedIngredients.indexOf(text);
+    // selectedIngredients.splice(index, 1); 
 }

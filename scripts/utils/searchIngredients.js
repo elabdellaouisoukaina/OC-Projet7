@@ -1,5 +1,8 @@
 // import {displayCards} from "./recipeCard.js"
-import  {addSelectedIngredient, getSelectedIngredients, removeSelectedIngredient, isIngredientSelected, getCurrentRecipes} from "../utils/state.js"
+import  { addSelectedIngredient, getSelectedIngredients, removeSelectedIngredient, 
+        isIngredientSelected, getCurrentRecipes, getAllFilters } 
+        from "../utils/state.js"
+import { search } from "../pages/index.js";
 
 
 export function searchIngredient(value) {
@@ -82,12 +85,12 @@ export function updateIngredientDropdown(ingredients){
                     // Au click sur la croix l'ingrdédient est deselectionné
                     i.addEventListener("click", () => {
                         removeSelectedIngredient(ingredients[i]);
-                        console.log(getSelectedIngredients())
-
                         ingredientSelected.remove();
                         button.classList.remove('dropdownSelected');
 
-                        // displayCards(previousDisplayedRecipes)
+                        // -> Afficher les recettes selectionnées
+                        let filters = getAllFilters();
+                        search(filters);
                     })
 
                     ingredientSelected.appendChild(p);
@@ -95,30 +98,13 @@ export function updateIngredientDropdown(ingredients){
                     ingredientsDropdownDiv.appendChild(ingredientSelected);
 
                     // -> Afficher les recettes selectionnées
-                    // let newDisplayedRecipes = [];
-
-                        // for (let index=0; index < displayedRecipes.length; index++) {
-                        //     const ingr = displayedRecipes[index].ingredients;
-                        //     for (let j=0; j < ingr.length; j++){
-                        //         if (ingr[j].ingredient.trim().toLowerCase() === ingredient.trim().toLowerCase()) {
-                        //             if(!newDisplayedRecipes.includes(displayedRecipes[index])){
-                        //                 newDisplayedRecipes.push(displayedRecipes[index])
-                        //             }
-                        //         }
-                        //     }
-                        // }
-
-                        // displayedRecipes = newDisplayedRecipes;
-
-                        // displayCards(displayedRecipes)
-
-                        // updateIngredientDropdown(newDisplayedRecipes)
+                    let filters = getAllFilters();
+                    search(filters);
+                    
                 }   
                     
                 else {
                     removeSelectedIngredient(ingredients[index]);
-                    console.log(getSelectedIngredients())
-
                     button.classList.remove('dropdownSelected');
                     
                     let selector = "div." + ingredientClass;
@@ -126,6 +112,9 @@ export function updateIngredientDropdown(ingredients){
 
                     ingredientSelected.remove();
 
+                    // -> Afficher les recettes selectionnées
+                    let filters = getAllFilters();
+                    search(filters);
                 }
             })
         }

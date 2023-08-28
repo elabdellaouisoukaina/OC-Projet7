@@ -1790,7 +1790,7 @@ export const recipes = [
         ],
         "time": 60,
         "description":"...",
-        "appliance": "Four",
+        "appliance": "app1",
         "ustensils":["ust1","ust2"]
     },
     {
@@ -1814,7 +1814,7 @@ export const recipes = [
         ],
         "time": 60,
         "description":"...",
-        "appliance": "Four",
+        "appliance": "app2",
         "ustensils":["ust1","ust2","ust4"]
     },
     {
@@ -1843,7 +1843,7 @@ export const recipes = [
         ],
         "time": 60,
         "description":"...",
-        "appliance": "Four",
+        "appliance": "app2",
         "ustensils":["ust1","ust2","ust3","ust4"]
     },
     {
@@ -1872,7 +1872,7 @@ export const recipes = [
         ],
         "time": 60,
         "description":"...",
-        "appliance": "Four",
+        "appliance": "app1",
         "ustensils":["ust1","ust5","ust3","ust4"]
     }
 ]
