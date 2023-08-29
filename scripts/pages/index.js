@@ -1,10 +1,9 @@
 import {recipes} from "../../data/recipes.js"
 import {displayCards} from "../utils/recipeCard.js"
-import {searchText} from "../utils/searchBar.js"
-import {searchIngredient, createIngredientDropdown, updateIngredientDropdown} from "../utils/searchIngredients.js"
-import {updateUstensilDropdown} from "../utils/searchUstensils.js"
-import {updateApplianceDropdown} from "../utils/searchAppliance.js"
-import {setCurrentRecipes, getCurrentRecipes} from "../utils/state.js"
+// import {searchText} from "../utils/searchBar.js"
+import {searchIngredient, createIngredientDropdown} from "../utils/searchIngredients.js"
+// import {updateUstensilDropdown} from "../utils/searchUstensils.js"
+// import {updateApplianceDropdown} from "../utils/searchAppliance.js"
 
 
 // ------------------ Fonction générale de recherche ------------------------------------------------------------------------
@@ -17,7 +16,7 @@ export function search(filters) { // filters = [[ingredientsSelected], 'applianc
         let ingredientsFilter = filters[0];
         let applianceFilter = filters[1].trim().toLowerCase();
         let ustensilsFilter = filters[2];
-        let searchbarFilter = filters[3];
+        // let searchbarFilter = filters[3];
 
         while (isRecipeAResult) {
 
@@ -99,36 +98,40 @@ export function search(filters) { // filters = [[ingredientsSelected], 'applianc
         }
     }
 
-    console.log(displayedRecipes);
+    if (displayedRecipes.length !== 0) {
+        displayCards(displayedRecipes);
+    } else {
+        // AFFICHER :
+        // Aucune recette ne contient ‘XXX ’ vous pouvez chercher « tarte aux pommes», « poisson », etc.
+    }
 
-    displayCards(displayedRecipes);
+
+    return displayedRecipes;
 }
 
 
 // ------------------ Initialisation ------------------------------------------------------
 function init() {
-    setCurrentRecipes(recipes);
     displayCards(recipes);
 
     // ============== Searchbar ============================
-    const searchInput = document.querySelector('.searchBar');
+    // const searchInput = document.querySelector('.searchBar');
 
-    searchInput.addEventListener("input", (e) => {
-        let value = e.target.value
+    // searchInput.addEventListener("input", (e) => {
+    //     let value = e.target.value
 
-        // Vérifie si input existe et fait minimum 3 caractères
-        if (value && value.trim().length > 2){
-            let displayedRecipes = searchText(recipes, value);
-            setCurrentRecipes(displayedRecipes)
-            displayCards(displayedRecipes);
-            updateIngredientDropdown(displayedRecipes);
-            // updateUstensilDropdown(displayedRecipes);
-            // updateApplianceDropdown(displayedRecipes);
-        }
+    //     // Vérifie si input existe et fait minimum 3 caractères
+    //     if (value && value.trim().length > 2){
+    //         let displayedRecipes = searchText(recipes, value);
+    //         displayCards(displayedRecipes);
+    //         updateIngredientDropdown(displayedRecipes);
+    //         // updateUstensilDropdown(displayedRecipes);
+    //         // updateApplianceDropdown(displayedRecipes);
+    //     }
 
-    });
+    // });
 
-    // ============== Dropdown ingrédients =================================================
+    // ============== Dropdown ingrédients =======================================================================
     createIngredientDropdown(recipes); // Initialisation de la liste de tous les ingrédients 
 
     // Champs de recherche du dropdown
@@ -140,7 +143,7 @@ function init() {
         if (value && value.trim().length > 2){
             searchIngredient(value)
         } else if (value.length === 0) {
-            createIngredientDropdown(getCurrentRecipes());
+            searchIngredient(''); // Permet de réafficher la liste compléte des ingrédients des recettes actuelles
         }
     });
 

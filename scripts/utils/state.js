@@ -1,12 +1,12 @@
-let currentRecipes = [];
+// let currentRecipes = [];
 
-export function getCurrentRecipes() {
-    return currentRecipes;
-}
+// export function getCurrentRecipes() {
+//     return currentRecipes;
+// }
 
-export function setCurrentRecipes(recipesArray){
-    currentRecipes = recipesArray;
-}
+// export function setCurrentRecipes(recipesArray){
+//     currentRecipes = recipesArray;
+// }
 
 // -------------------- Tous les filtres --------------------
 

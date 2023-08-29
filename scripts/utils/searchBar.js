@@ -1,6 +1,20 @@
 import {setCurrentRecipes} from "../utils/state.js"
 
 export function searchText(recipes, value){ // entry est un mot complet ou au minimum 3 lettres
+    
+    // ---- A MODIFIER ----
+
+    // CHERCHE DANS :
+    //     - titre de la recette
+    //     - liste des ingrédients de la recette
+    //     - la description de la recette
+    
+    // ACTUALISER DROPDOWNS :
+    //     - ingrédients
+    //     - ustensiles
+    //     - appareil
+ 
+
     const results = [];
     let entry = value.trim().toLowerCase();
 

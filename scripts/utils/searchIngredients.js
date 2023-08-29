@@ -1,6 +1,5 @@
 // import {displayCards} from "./recipeCard.js"
-import  { addSelectedIngredient, getSelectedIngredients, removeSelectedIngredient, 
-        isIngredientSelected, getCurrentRecipes, getAllFilters } 
+import  { addSelectedIngredient, removeSelectedIngredient, isIngredientSelected, getAllFilters } 
         from "../utils/state.js"
 import { search } from "../pages/index.js";
 
@@ -10,7 +9,8 @@ export function searchIngredient(value) {
     let returnedRecipes = [];
 
     // Création de la liste des ingrédients correspondant aux recettes affichées
-    let recipes = getCurrentRecipes();
+    const filters = getAllFilters();
+    let recipes = search(filters);
     let ingredientsList = [];
 
     for (let index = 0; index < recipes.length; index ++){
@@ -19,33 +19,47 @@ export function searchIngredient(value) {
         for (let i = 0; i < ingredientsRecipe.length; i ++){
             const ingredient = ingredientsRecipe[i].ingredient;
 
-            let comparableValue = value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            let comparableIngredient = ingredient.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-            if (comparableIngredient.includes(comparableValue) ){
-                returnedRecipes.push(recipes[index]);
-                
-                if(!ingredientsList.includes(ingredient)){
-                    ingredientsList.push(ingredient);
+            if (value !== ''){
+                let comparableValue = value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                let comparableIngredient = ingredient.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    
+                if (comparableIngredient.includes(comparableValue) ){
+                    returnedRecipes.push(recipes[index]);
+                    
+                    if(!ingredientsList.includes(ingredient)){
+                        ingredientsList.push(ingredient);
+                    }
                 }
+            }
+            // Utile quand on efface le champs de recherche à 0
+            else {
+                // Tous les ingrédients des recettes des filtres actuels sont de nouveau affichés dans le dropdown
+                ingredientsList.push(ingredient);
             }
         }
     }
 
     updateIngredientDropdown(ingredientsList);
+    // updateIngredientDropdown(returnedRecipes);
 }
 
 export function updateIngredientDropdown(ingredients){
     // Mise à 0 de la liste des ingrédients présents dans le dropdown
     let dropdownGenerated = document.querySelectorAll('.dropdown-ingredients-generated');
+    let newButtons = [];
+
     dropdownGenerated.forEach(element => {
-        element.remove();
+        if (!element.classList.contains('dropdownSelected')) {
+            element.remove();
+        } else {
+            newButtons.push(element);
+        }
     });
     
     let ingredientsList = [];
 
     for (let index = 0; index < ingredients.length; index ++){
-        const ingredientClass = ingredients[index].split(" ").join("").normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const ingredientClass = ingredients[index].split(" ").join("").normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
         if(!ingredientsList.includes(ingredients[index])){
 
@@ -56,10 +70,23 @@ export function updateIngredientDropdown(ingredients){
             const li = document.createElement('li');
             li.classList.add(ingredientClass);
             const button = document.createElement('button');
+            button.value = ingredientClass;
             button.classList.add('dropdown-item','dropdown-generated', 'dropdown-ingredients-generated');
-            button.textContent = ingredients[index];
-            li.appendChild(button);
-            ingredientsDropdown.appendChild(li);
+            button.textContent = ingredients[index][0].toUpperCase() + ingredients[index].slice(1);
+
+            // Ajouter le bouton seulement s'il n'est pas déjà selectionné
+            let buttonToAdd = true;
+            newButtons.forEach ( element => {
+                if (element.value === button.value) {
+                    buttonToAdd = false;
+                }
+            });
+            if (buttonToAdd) {
+                li.appendChild(button);
+                ingredientsDropdown.appendChild(li);
+                newButtons.push(button);
+            }
+            
 
             // let previousDisplayedRecipes = displayedRecipes;
             
@@ -126,7 +153,9 @@ export function createIngredientDropdown(recipes){
     // Mise à 0 de la liste des ingrédients présents dans le dropdown
     let dropdownGenerated = document.querySelectorAll('.dropdown-ingredients-generated');
     dropdownGenerated.forEach(element => {
-        element.remove();
+        if (!element.classList.contains('dropdownSelected')) {
+            element.remove();
+        } 
     });
 
     // Création de la liste des ingrédients correspondant aux recettes affichées
