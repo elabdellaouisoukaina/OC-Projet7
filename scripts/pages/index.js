@@ -3,7 +3,7 @@ import {displayCards} from "../utils/recipeCard.js"
 // import {searchText} from "../utils/searchBar.js"
 import {searchIngredient, createIngredientDropdown} from "../utils/searchIngredients.js"
 import {searchUstensil, createUstensilDropdown} from "../utils/searchUstensils.js"
-// import {updateApplianceDropdown} from "../utils/searchAppliance.js"
+import {searchAppliance, createApplianceDropdown} from "../utils/searchAppliance.js"
 
 
 // ------------------ Fonction générale de recherche ------------------------------------------------------------------------
@@ -147,12 +147,27 @@ function init() {
         }
     });
 
+
     // ============== Dropdown appareil ====================================================
     // updateApplianceDropdown(recipes); // Initialisation de la liste de tous les appareils
+    createApplianceDropdown(recipes); // Initialisation de la liste de tous les appareils 
+
+    // Champs de recherche du dropdown
+    const dropdownApplianceInput = document.querySelector('.dropdownApplianceInput');
+    dropdownApplianceInput.addEventListener("input", (e) => {
+        let applianceInput = e.target.value
+
+        // Vérifie si input existe et fait minimum 3 caractères
+        if (applianceInput && applianceInput.trim().length > 2){
+            searchAppliance(applianceInput)
+        } else if (applianceInput.length === 0) {
+            searchAppliance(''); // Permet de réafficher la liste compléte des ingrédients des recettes actuelles
+        }
+    });
+
 
     // ============== Dropdown ustensiles =================================================
-    // updateUstensilDropdown(recipes); // Initialisation de la liste de tous les ustensils 
-    createUstensilDropdown(recipes); // Initialisation de la liste de tous les ingrédients 
+    createUstensilDropdown(recipes); // Initialisation de la liste de tous les ustensiles 
 
     // Champs de recherche du dropdown
     const dropdownUstensilInput = document.querySelector('.dropdownUstensilInput');

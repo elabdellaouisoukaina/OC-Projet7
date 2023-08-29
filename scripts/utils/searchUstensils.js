@@ -1,15 +1,15 @@
 // import {displayCards} from "./recipeCard.js"
-import  { addSelectedUstensil, removeSelectedUstensil, isUstensilSelected, getAllFilters } 
-        from "../utils/state.js"
+import { addSelectedUstensil, removeSelectedUstensil, isUstensilSelected, getAllFilters } from "../utils/state.js"
 import { search } from "../pages/index.js";
-import {createIngredientDropdown} from "../utils/searchIngredients.js"
+import { createIngredientDropdown } from "../utils/searchIngredients.js"
+import { createApplianceDropdown } from "../utils/searchAppliance.js"
 
 
 export function searchUstensil(value) {
 
     let returnedRecipes = [];
 
-    // Création de la liste des ingrédients correspondant aux recettes affichées
+    // Création de la liste des ustensiles correspondant aux recettes affichées
     const filters = getAllFilters();
     let recipes = search(filters);
     let ustensilsList = [];
@@ -35,7 +35,7 @@ export function searchUstensil(value) {
             }
             // Utile quand on efface le champs de recherche à 0
             else {
-                // Tous les ingrédients des recettes des filtres actuels sont de nouveau affichés dans le dropdown
+                // Tous les ustensiles des recettes des filtres actuels sont de nouveau affichés dans le dropdown
                 ustensilsList.push(ustensil);
             }
         }
@@ -47,8 +47,8 @@ export function searchUstensil(value) {
 }
 
 export function updateUstensilDropdown(ustensils){
-    // Mise à 0 de la liste des ingrédients présents dans le dropdown
-    let dropdownGenerated = document.querySelectorAll('.dropdown-ustensils-generated');
+    // Mise à 0 de la liste des ustensiles présents dans le dropdown
+    const dropdownGenerated = document.querySelectorAll('.dropdown-ustensils-generated');
     let newButtons = [];
 
     dropdownGenerated.forEach(element => {
@@ -68,7 +68,7 @@ export function updateUstensilDropdown(ustensils){
 
             ustensilsList.push(ustensils[index]);
             
-            // Création de l'ingrédient dans le dropdown
+            // Création de l'ustensile dans le dropdown
             const ustensilsDropdown = document.querySelector('.ustensilsDropdown');
             const li = document.createElement('li');
             li.classList.add(ustensilClass);
@@ -123,6 +123,7 @@ export function updateUstensilDropdown(ustensils){
                         const recipes = search(filters);
                         createUstensilDropdown(recipes);
                         createIngredientDropdown(recipes);
+                        createApplianceDropdown(recipes);
                         search(filters);
 
                     })
@@ -140,6 +141,7 @@ export function updateUstensilDropdown(ustensils){
                     const recipes = search(filters);
                     createUstensilDropdown(recipes);
                     createIngredientDropdown(recipes);
+                    createApplianceDropdown(recipes);
                     search(filters);
 
                     
@@ -154,6 +156,7 @@ export function updateUstensilDropdown(ustensils){
                  const recipes = search(filters);
                  createUstensilDropdown(recipes);
                  createIngredientDropdown(recipes);
+                 createApplianceDropdown(recipes);
                  search(filters);
             })
         }
@@ -166,15 +169,15 @@ export function updateUstensilDropdown(ustensils){
 
 export function createUstensilDropdown(recipes){
 
-    // Mise à 0 de la liste des ingrédients présents dans le dropdown
-    let dropdownGenerated = document.querySelectorAll('.dropdown-ustensils-generated');
+    // Mise à 0 de la liste des ustensiles présents dans le dropdown
+    const dropdownGenerated = document.querySelectorAll('.dropdown-ustensils-generated');
     dropdownGenerated.forEach(element => {
         if (!element.classList.contains('dropdownSelected')) {
             element.remove();
         } 
     });
 
-    // Création de la liste des ingrédients correspondant aux recettes affichées
+    // Création de la liste des ustensiles correspondant aux recettes affichées
     let ustensilsList = [];
 
     for (let index = 0; index < recipes.length; index ++){

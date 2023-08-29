@@ -1,8 +1,8 @@
 // import {displayCards} from "./recipeCard.js"
-import  { addSelectedIngredient, removeSelectedIngredient, isIngredientSelected, getAllFilters } 
-        from "../utils/state.js"
+import { addSelectedIngredient, removeSelectedIngredient, isIngredientSelected, getAllFilters } from "../utils/state.js"
 import { search } from "../pages/index.js";
-import {createUstensilDropdown} from "../utils/searchUstensils.js"
+import { createUstensilDropdown } from "../utils/searchUstensils.js"
+import { createApplianceDropdown } from "../utils/searchAppliance.js"
 
 export function searchIngredient(value) {
 
@@ -46,7 +46,7 @@ export function searchIngredient(value) {
 
 export function updateIngredientDropdown(ingredients){
     // Mise à 0 de la liste des ingrédients présents dans le dropdown
-    let dropdownGenerated = document.querySelectorAll('.dropdown-ingredients-generated');
+    const dropdownGenerated = document.querySelectorAll('.dropdown-ingredients-generated');
     let newButtons = [];
 
     dropdownGenerated.forEach(element => {
@@ -121,6 +121,7 @@ export function updateIngredientDropdown(ingredients){
                         const recipes = search(filters);
                         createIngredientDropdown(recipes);
                         createUstensilDropdown(recipes);
+                        createApplianceDropdown(recipes);
                         search(filters);
 
                     })
@@ -139,6 +140,7 @@ export function updateIngredientDropdown(ingredients){
                     const recipes = search(filters);
                     createIngredientDropdown(recipes);
                     createUstensilDropdown(recipes);
+                    createApplianceDropdown(recipes);
                     search(filters);
                     
                     let selector = "div." + ingredientClass;
@@ -152,6 +154,7 @@ export function updateIngredientDropdown(ingredients){
                 const recipes = search(filters);
                 createIngredientDropdown(recipes);
                 createUstensilDropdown(recipes);
+                createApplianceDropdown(recipes);
                 search(filters);
 
             })
@@ -165,7 +168,7 @@ export function updateIngredientDropdown(ingredients){
 export function createIngredientDropdown(recipes){
 
     // Mise à 0 de la liste des ingrédients présents dans le dropdown
-    let dropdownGenerated = document.querySelectorAll('.dropdown-ingredients-generated');
+    const dropdownGenerated = document.querySelectorAll('.dropdown-ingredients-generated');
     dropdownGenerated.forEach(element => {
         if (!element.classList.contains('dropdownSelected')) {
             element.remove();
