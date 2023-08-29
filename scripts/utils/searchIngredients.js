@@ -2,7 +2,7 @@
 import  { addSelectedIngredient, removeSelectedIngredient, isIngredientSelected, getAllFilters } 
         from "../utils/state.js"
 import { search } from "../pages/index.js";
-
+import {createUstensilDropdown} from "../utils/searchUstensils.js"
 
 export function searchIngredient(value) {
 
@@ -40,7 +40,8 @@ export function searchIngredient(value) {
     }
 
     updateIngredientDropdown(ingredientsList);
-    // updateIngredientDropdown(returnedRecipes);
+ 
+    return returnedRecipes;
 }
 
 export function updateIngredientDropdown(ingredients){
@@ -104,48 +105,61 @@ export function updateIngredientDropdown(ingredients){
                     ingredientSelected.classList.add("ingredientSelected", ingredientClass, "filterSelected");
 
                     const p = document.createElement("p");
-                    p.textContent = ingredients[index];
+                    p.textContent = ingredients[index][0].toUpperCase() + ingredients[index].slice(1);
 
                     const i = document.createElement("i");
                     i.classList.add('fa-solid', 'fa-xmark');
 
                     // Au click sur la croix l'ingrdédient est deselectionné
                     i.addEventListener("click", () => {
-                        removeSelectedIngredient(ingredients[i]);
+                        removeSelectedIngredient(ingredients[index]);
                         ingredientSelected.remove();
                         button.classList.remove('dropdownSelected');
 
                         // -> Afficher les recettes selectionnées
-                        let filters = getAllFilters();
+                        const filters = getAllFilters();
+                        const recipes = search(filters);
+                        createIngredientDropdown(recipes);
+                        createUstensilDropdown(recipes);
                         search(filters);
+
                     })
 
                     ingredientSelected.appendChild(p);
                     ingredientSelected.appendChild(i);
-                    ingredientsDropdownDiv.appendChild(ingredientSelected);
-
-                    // -> Afficher les recettes selectionnées
-                    let filters = getAllFilters();
-                    search(filters);
-                    
+                    ingredientsDropdownDiv.appendChild(ingredientSelected);                   
                 }   
-                    
+
                 else {
                     removeSelectedIngredient(ingredients[index]);
                     button.classList.remove('dropdownSelected');
+
+                   // -> Afficher les recettes selectionnées
+                    const filters = getAllFilters();
+                    const recipes = search(filters);
+                    createIngredientDropdown(recipes);
+                    createUstensilDropdown(recipes);
+                    search(filters);
                     
                     let selector = "div." + ingredientClass;
                     let ingredientSelected = document.querySelector(selector);
 
                     ingredientSelected.remove();
-
-                    // -> Afficher les recettes selectionnées
-                    let filters = getAllFilters();
-                    search(filters);
                 }
+
+                // -> Afficher les recettes selectionnées
+                const filters = getAllFilters();
+                const recipes = search(filters);
+                createIngredientDropdown(recipes);
+                createUstensilDropdown(recipes);
+                search(filters);
+
             })
         }
     }
+    // -> Afficher les recettes selectionnées
+    const filters = getAllFilters();
+    search(filters);
 }
 
 export function createIngredientDropdown(recipes){

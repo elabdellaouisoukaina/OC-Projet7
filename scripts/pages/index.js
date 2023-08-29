@@ -2,7 +2,7 @@ import {recipes} from "../../data/recipes.js"
 import {displayCards} from "../utils/recipeCard.js"
 // import {searchText} from "../utils/searchBar.js"
 import {searchIngredient, createIngredientDropdown} from "../utils/searchIngredients.js"
-// import {updateUstensilDropdown} from "../utils/searchUstensils.js"
+import {searchUstensil, createUstensilDropdown} from "../utils/searchUstensils.js"
 // import {updateApplianceDropdown} from "../utils/searchAppliance.js"
 
 
@@ -135,23 +135,37 @@ function init() {
     createIngredientDropdown(recipes); // Initialisation de la liste de tous les ingrédients 
 
     // Champs de recherche du dropdown
-    const dropdownSearchInput = document.querySelector('.dropdownSearchInput');
-    dropdownSearchInput.addEventListener("input", (e) => {
-        let value = e.target.value
+    const dropdownIngredientInput = document.querySelector('.dropdownIngredientInput');
+    dropdownIngredientInput.addEventListener("input", (e) => {
+        let ingredientInput = e.target.value
 
         // Vérifie si input existe et fait minimum 3 caractères
-        if (value && value.trim().length > 2){
-            searchIngredient(value)
-        } else if (value.length === 0) {
+        if (ingredientInput && ingredientInput.trim().length > 2){
+            searchIngredient(ingredientInput)
+        } else if (ingredientInput.length === 0) {
             searchIngredient(''); // Permet de réafficher la liste compléte des ingrédients des recettes actuelles
         }
     });
 
     // ============== Dropdown appareil ====================================================
-    // updateApplianceDropdown(recipes); // Initialisation de la liste de tous les appareils 
+    // updateApplianceDropdown(recipes); // Initialisation de la liste de tous les appareils
 
     // ============== Dropdown ustensiles =================================================
     // updateUstensilDropdown(recipes); // Initialisation de la liste de tous les ustensils 
+    createUstensilDropdown(recipes); // Initialisation de la liste de tous les ingrédients 
+
+    // Champs de recherche du dropdown
+    const dropdownUstensilInput = document.querySelector('.dropdownUstensilInput');
+    dropdownUstensilInput.addEventListener("input", (e) => {
+        let ustensilInput = e.target.value
+
+        // Vérifie si input existe et fait minimum 3 caractères
+        if (ustensilInput && ustensilInput.trim().length > 2){
+            searchUstensil(ustensilInput)
+        } else if (ustensilInput.length === 0) {
+            searchUstensil(''); // Permet de réafficher la liste compléte des ingrédients des recettes actuelles
+        }
+    });
     
 }
 

@@ -90,10 +90,19 @@ export function addSelectedUstensil(ustensil) {
 }
 
 export function removeSelectedUstensil(ustensil) {
-    const index = selectedIngredients.indexOf(ustensil);
-    selectedIngredients.splice(index, 1); 
+    const index = selectedUstensils.indexOf(ustensil);
+    if (index!== -1) {
+        selectedUstensils.splice(index, 1); 
+    }
 }
 
+export function isUstensilSelected(ustensil) {
+    if (selectedUstensils.includes(ustensil)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 // -------------------- Search bar --------------------
